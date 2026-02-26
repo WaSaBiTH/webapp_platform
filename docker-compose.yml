@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./web
+    ports:
+      - "80:80"
+    volumes:
+      - ./web/src:/var/www/html
+      # Mount rclone config
+      - ./web/rclone.conf:/var/www/rclone.conf
+    environment:
+      - DB_HOST=db
+      - DB_NAME=webappdb
+      - DB_USER=webuser
+      - DB_PASS=webpass
+    depends_on:
+      - db
+    networks:
+      - webnet
+
+  db:
+    image: mariadb:10.11
+    environment:
+      - MYSQL_DATABASE=webappdb
+      - MYSQL_USER=webuser
+      - MYSQL_PASSWORD=webpass
+      - MYSQL_ROOT_PASSWORD=somestrongpassword
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db_init:/docker-entrypoint-initdb.d
+    networks:
+      - webnet
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=db
+    depends_on:
+      - db
+    networks:
+      - webnet
+
+volumes:
+  db_data:
+
+
+networks:
+  webnet:
