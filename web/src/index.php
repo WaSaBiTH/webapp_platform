@@ -280,6 +280,60 @@ $autoBackupEnabled = ($setting && $setting['setting_value'] === '1');
             opacity: 0.9;
         }
 
+        /* Server Status Card Styles */
+        .server-status-card {
+            background: linear-gradient(to right, #e0e7ff, #c7d2fe);
+            padding: 25px 30px;
+            border-radius: var(--radius-md);
+            margin-top: 30px;
+            border: 1px solid #4f46e550;
+        }
+        
+        .server-status-card h3 {
+            color: #3730a3;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .status-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .status-label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .status-value {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+
+        .status-value code {
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
         .footer-links {
             margin-top: 35px;
             padding-top: 25px;
@@ -389,6 +443,60 @@ $autoBackupEnabled = ($setting && $setting['setting_value'] === '1');
             align-items: center;
             margin: 0;
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 650px) {
+            body { 
+                padding: 15px 10px; 
+            }
+            .container { 
+                padding: 25px 20px; 
+            }
+            h1 { 
+                font-size: 1.8rem; 
+            }
+            .input-group { 
+                flex-direction: column; 
+            }
+            button {
+                justify-content: center;
+            }
+            .backup-card { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                gap: 20px; 
+                padding: 20px; 
+            }
+            .backup-card > form { 
+                margin-left: 0 !important; 
+                width: 100%; 
+            }
+            .backup-card > form button { 
+                width: 100%; 
+            }
+            .toggle-container { 
+                margin-top: 15px; 
+                padding-top: 15px; 
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .toggle-label { 
+                display: block; 
+                margin-left: 0 !important; 
+            }
+            .auto-backup-form { 
+                align-items: flex-start; 
+                flex-direction: column; 
+                gap: 10px; 
+            }
+            th, td {
+                padding: 12px 10px;
+            }
+            .td-date {
+                font-size: 0.8em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -399,7 +507,7 @@ $autoBackupEnabled = ($setting && $setting['setting_value'] === '1');
         </div>
 
         <div class="form-card">
-            <h3 class="section-title"><i class="fas fa-users-cog"></i> M1: Access Control & User Management</h3>
+            <h3 class="section-title"><i class="fas fa-users-cog"></i>ADD User_List</h3>
             <form method="POST" class="input-group">
                 <input type="text" name="name" placeholder="Enter new user's full name" required autocomplete="off">
                 <button type="submit"><i class="fas fa-user-plus"></i> Add User</button>
@@ -446,7 +554,7 @@ else {
         <!-- Backup functionality -->
         <div class="backup-card">
             <div class="backup-info" style="flex-grow: 1;">
-                <h3><i class="fas fa-shield-alt"></i> M5: Security & Disaster Recovery</h3>
+                <h3><i class="fas fa-shield-alt"></i>Security & Disaster Recovery</h3>
                 <p>Hot backup MariaDB and sync to Google Drive via Rclone.</p>
                 
                 <div class="toggle-container">
@@ -466,7 +574,7 @@ else {
         </div>
 
         <div class="footer-links">
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1" target="_blank" class="link-card">
+            <a href="https://rick.nerial.uk/video.mp4" target="_blank" class="link-card">
                 <i class="fas fa-database"></i> Open phpMyAdmin Dashboard
             </a>
         </div>

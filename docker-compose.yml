@@ -35,11 +35,12 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: webapp_platform-phpmyadmin-1
     restart: always
-    ports:
-      - "8081:80"
     environment:
-      - PMA_HOST=db
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ABSOLUTE_URI: "http://localhost/db-manage-app/"
     depends_on:
       - db
     networks:

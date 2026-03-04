@@ -56,6 +56,15 @@ else {
         .log div { margin-bottom: 5px; }
         a.back-btn { display: inline-block; margin-top: 25px; text-decoration: none; color: white; background: #1a73e8; padding: 10px 20px; border-radius: 4px; font-weight: bold; }
         a.back-btn:hover { background: #1557b0; }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 650px) {
+            body { padding: 20px 10px; }
+            .container { padding: 20px 15px; }
+            h2 { font-size: 1.5rem; }
+            .log { font-size: 12px; padding: 15px; }
+            a.back-btn { display: block; text-align: center; }
+        }
     </style>
 </head>
 <body>

@@ -7,8 +7,18 @@ RUN apt-get update && apt-get install -y \
     cron \
     && docker-php-ext-install pdo pdo_mysql mysqli
 
-# Enable Apache mod_rewrite if needed
-RUN a2enmod rewrite
+# Enable Apache mod_rewrite and proxy modules for Dimension 4 phpMyAdmin masking
+RUN a2enmod rewrite proxy proxy_http
+
+# Disable unnecessary and potentially insecure modules
+RUN a2dismod -f autoindex status env
+
+# Copy custom Apache configurations
+COPY apache/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY apache/tuning.conf /etc/apache2/conf-available/tuning.conf
+
+# Enable the tuning configuration
+RUN a2enconf tuning
 
 # Setup a dummy rclone config if it doesn't exist so rclone doesn't crash on boot 
 # (real one will be mounted from host)
